@@ -14,12 +14,15 @@ app.component('product-display', {
       </div>
       <div class="product-info">
         <h1>{{ title }}</h1>
+
         <p v-if="inStock">In Stock</p>
         <p v-else>Out of Stock</p>
+
         <p>Shipping: {{ shipping }}</p>
         <ul>
           <li v-for="detail in details">{{ detail }}</li>
         </ul>
+
         <div 
           v-for="(variant, index) in variants" 
           :key="variant.id" 
@@ -35,13 +38,7 @@ app.component('product-display', {
           v-on:click="addToCart">
           Add to Cart
         </button>
-        <button 
-          class="button" 
-          :class="{ disabledButton: !inStock }" 
-          :disabled="!inStock" 
-          v-on:click="removeItemById">
-          Add to Cart
-        </button>
+
       </div>
     </div>
   </div>`,
@@ -63,9 +60,6 @@ app.component('product-display', {
       },
       updateVariant(index) {
           this.selectedVariant = index
-      },
-      removeItemById() {
-          this.$emit('remove-item-by-id', this.variants[this.selectedVariant].id)
       }
   },
   computed: {
